@@ -3,14 +3,17 @@
 #include "node.h"
 
 class Tree {
- private:
+private:
   Node* m_root;
- public:
+  Node* delFromTree(Node* node);
+public:
   Tree(Node* root);
-  
   Node* getRoot();
-  void setRoot(Node* root);
-  
+  void addNode(Node* node);
+  bool hasVal(int value);
+  void deleteVal(int value);
+  void printTree();
+  void wipe();
   ~Tree();
 };
 
