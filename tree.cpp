@@ -1,3 +1,4 @@
+
 #include <iostream>
 #include <tuple>
 #include "tree.h"
@@ -221,31 +222,33 @@ Node* successorOf(Node* node){ //get the successor
 }
 
 Node* Tree::delFromTree(Node* node){
-  if(node->hasBothChildren()){ //Node has both children
+  if(node->hasBothChildren()){ //node has both children
     node->setValue(successorOf(node)->getValue());
     m_root = delFromTree(successorOf(node));
     return m_root;
-  }else if(node->hasLeftChild()){ //Node has one child (left)
+  }else if(node->hasLeftChild()){ //node has one child (left)
     if(node->getParent() != nullptr){
       if(node->isLeftChild()){
 	node->getParent()->setLeft(node->getLeft());
       }else{
 	node->getParent()->setRight(node->getLeft());
       }
+      node->getLeft()->setParent(node->getParent());
       return m_root;
     }
     return m_root->getLeft();
-  }else if(node->hasRightChild()){ //Node has one child (right)
+  }else if(node->hasRightChild()){ //node has one child (right)
     if(node->getParent() != nullptr){
       if(node->isLeftChild()){
 	node->getParent()->setLeft(node->getRight());
       }else{
 	node->getParent()->setRight(node->getRight());
       }
+      node->getRight()->setParent(node->getParent());
       return m_root;
     }
     return m_root->getRight();
-  }else{ //Node is a leaf
+  }else{ //node is a leaf
     if(node->getParent() != nullptr){
       if(node->isLeftChild()){
 	node->getParent()->setLeft(nullptr);
@@ -256,9 +259,11 @@ Node* Tree::delFromTree(Node* node){
     }
     return nullptr;
   }
+
+  //pass in node to the rebalance function
 }
 
-void Tree::addAttempt2(int val){ //Top down iterative insertion balancing 
+void Tree::addAttempt2(int val){ //top down iterative insertion balancing 
   if(val > 0 && val < 1000){
     Node* n = m_root;
     Node* x;

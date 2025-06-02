@@ -9,6 +9,10 @@
 
 using namespace std;
 
+//Credit is owed to professor David R Gibson (and potentially et al.) of Valdosta State
+//whose documentation on top-down insertion in a red-black tree helped solve logical
+//errors in the implementation of insertion in this red-black tree
+
 bool cmp(char* input, const char* checkAgainst){ //simplify input to cstring comparison
   if(!strcasecmp(input,checkAgainst)){
     return true;
@@ -80,7 +84,7 @@ vector<int>* fillFromFile(vector<int>* fileVec){
 
 int main(){
   srand(time(NULL));
-  char* input = new char[20]; //Cstring and int input vars
+  char* input = new char[200]; //Cstring and int input vars
   int intput;
   Tree* tree = new Tree(nullptr); //Initialize new tree with no root
 
