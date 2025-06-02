@@ -1,32 +1,42 @@
 #ifndef NODE_H
 #define NODE_H
+#include <string>
 
-enum color {
-  red, 
-  black
+using namespace std;
+
+enum Color {
+  black,
+  red
 };
 
 class Node {
- private:
+  int m_value;
   Node* m_parent;
   Node* m_left;
   Node* m_right;
-  int m_value;
-  enum color m_color;
+  enum Color m_color;
  public:
   Node(int value);
   
-  Node* getParent();
+  bool hasBothChildren();
+  bool hasLeftChild();
+  bool hasRightChild();
+  bool isLeftChild();
+  bool isBlack();
+  
+  //GETTERS AND SETTERS
+  int getValue();
   Node* getLeft();
   Node* getRight();
-  int getValue();
-  enum color getColor();
-
-  void setParent(Node* parent);
+  Node* getParent();
+  Node* getSibling();
+  enum Color getColor();
+  
   void setLeft(Node* left);
   void setRight(Node* right);
+  void setParent(Node* parent);
   void setValue(int value);
-  void setColor(enum color color);
+  void setColor(enum Color color);
   
   ~Node();
 };
